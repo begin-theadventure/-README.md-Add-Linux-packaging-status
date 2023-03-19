@@ -15,7 +15,6 @@ actual fun MpDialog(
 	onCloseRequest: () -> Unit,
 	visible: Boolean,
 	title: String,
-	modifier: Modifier,
 	content: @Composable () -> Unit
 ) {
 	if (visible) {
@@ -23,7 +22,7 @@ actual fun MpDialog(
 			onDismissRequest = onCloseRequest,
 			content = {
 				Card {
-					Column(modifier = modifier) {
+					Column {
 						Text(
 							text = title,
 							style = MaterialTheme.typography.titleLarge

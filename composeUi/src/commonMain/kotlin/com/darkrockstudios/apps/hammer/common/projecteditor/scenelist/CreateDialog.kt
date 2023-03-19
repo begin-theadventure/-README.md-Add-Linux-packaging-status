@@ -22,11 +22,10 @@ internal fun CreateDialog(
 	MpDialog(
 		visible = show,
 		title = title,
-		modifier = Modifier.padding(Ui.Padding.XL),
 		onCloseRequest = { onClose(null) }
 	) {
 		var nameText by remember { mutableStateOf("") }
-		Box(modifier = Modifier.fillMaxWidth()) {
+		Box(modifier = Modifier.fillMaxWidth().padding(Ui.Padding.XL)) {
 			Column(
 				modifier = Modifier
 					.width(IntrinsicSize.Max)

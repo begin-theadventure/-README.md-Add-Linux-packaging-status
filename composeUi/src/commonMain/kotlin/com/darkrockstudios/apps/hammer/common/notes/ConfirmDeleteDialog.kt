@@ -25,10 +25,9 @@ internal fun ConfirmDeleteDialog(
 	MpDialog(
 		visible = true,
 		title = "Delete Note?",
-		modifier = Modifier.padding(Ui.Padding.XL),
 		onCloseRequest = { component.dismissConfirmDelete() }
 	) {
-		Box(modifier = Modifier.fillMaxWidth()) {
+		Box(modifier = Modifier.fillMaxWidth().padding(Ui.Padding.XL)) {
 			Column(
 				modifier = Modifier
 					.width(IntrinsicSize.Max)

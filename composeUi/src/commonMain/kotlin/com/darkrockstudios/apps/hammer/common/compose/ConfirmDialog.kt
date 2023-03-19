@@ -18,10 +18,9 @@ fun ConfirmDialog(
 	MpDialog(
 		visible = true,
 		title = title,
-		modifier = Modifier.padding(Ui.Padding.XL),
 		onCloseRequest = { onClose(false) }
 	) {
-		Box(modifier = Modifier.fillMaxWidth()) {
+		Box(modifier = Modifier.fillMaxWidth().padding(Ui.Padding.XL)) {
 			Column(
 				modifier = Modifier
 					.width(IntrinsicSize.Max)

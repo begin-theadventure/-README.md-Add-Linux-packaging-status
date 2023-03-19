@@ -2,6 +2,7 @@ package com.darkrockstudios.apps.hammer.common.projectselection
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -13,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -20,6 +22,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import com.darkrockstudios.apps.hammer.MR
 import com.darkrockstudios.apps.hammer.common.components.projectselection.ProjectSelection
 import com.darkrockstudios.apps.hammer.common.compose.MpDialog
+import com.darkrockstudios.apps.hammer.common.compose.Ui
 import com.darkrockstudios.apps.hammer.common.compose.moko.get
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -43,17 +46,17 @@ fun ServerSetupDialog(
         var passwordValue by rememberSaveable { mutableStateOf("") }
         var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
-        Column {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = sslValue,
-                    onCheckedChange = { sslValue = it },
-                )
-                Text(MR.strings.settings_server_setup_ssl_label.get())
-            }
+		Column(modifier = Modifier.padding(Ui.Padding.XL)) {
+			Row(verticalAlignment = Alignment.CenterVertically) {
+				Checkbox(
+					checked = sslValue,
+					onCheckedChange = { sslValue = it },
+				)
+				Text(MR.strings.settings_server_setup_ssl_label.get())
+			}
 
-            OutlinedTextField(
-                value = urlValue,
+			OutlinedTextField(
+				value = urlValue,
                 onValueChange = { urlValue = it },
                 label = { Text(MR.strings.settings_server_setup_url_hint.get()) }
             )
@@ -77,33 +80,31 @@ fun ServerSetupDialog(
                         Icons.Filled.Visibility
                     else Icons.Filled.VisibilityOff
 
-                    // Please provide localized description for accessibility services
-                    val description = if (passwordVisible) "Hide password" else "Show password"
+					// Please provide localized description for accessibility services
+					val description = if (passwordVisible) "Hide password" else "Show password"
 
-                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(imageVector = image, description)
-                    }
-                }
-            )
+					IconButton(onClick = { passwordVisible = !passwordVisible }) {
+						Icon(imageVector = image, description)
+					}
+				}
+			)
 
-            state.serverError?.let { error ->
-                Text(
-                    error,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall,
-                    fontStyle = FontStyle.Italic
-                )
-            }
+			Text(
+				state.serverError ?: "",
+				color = MaterialTheme.colorScheme.error,
+				style = MaterialTheme.typography.bodySmall,
+				fontStyle = FontStyle.Italic
+			)
 
-            Row {
-                Button(onClick = {
-                    scope.launch {
-                        val result = component.setupServer(
-                            ssl = sslValue,
-                            url = urlValue,
-                            email = emailValue,
-                            password = passwordValue,
-                            create = false
+			Row {
+				Button(onClick = {
+					scope.launch {
+						val result = component.setupServer(
+							ssl = sslValue,
+							url = urlValue,
+							email = emailValue,
+							password = passwordValue,
+							create = false
                         )
                         if (result.isSuccess) {
                             snackbarHostState.showSnackbar("Server setup complete!")

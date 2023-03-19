@@ -24,7 +24,6 @@ internal fun SaveDraftDialog(
 	MpDialog(
 		visible = state.isSavingDraft,
 		title = "Save Draft:",
-		modifier = Modifier.padding(Ui.Padding.XL),
 		onCloseRequest = {
 			component.endSaveDraft()
 			draftName = ""
@@ -34,6 +33,7 @@ internal fun SaveDraftDialog(
 			Column(
 				modifier = Modifier
 					.width(IntrinsicSize.Max)
+					.padding(Ui.Padding.XL)
 					.align(Alignment.Center)
 			) {
 				TextField(

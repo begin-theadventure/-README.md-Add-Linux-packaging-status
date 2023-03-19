@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.darkrockstudios.apps.hammer.common.components.notes.Notes
 import com.darkrockstudios.apps.hammer.common.compose.MpDialog
 import com.darkrockstudios.apps.hammer.common.compose.Ui
@@ -15,20 +16,20 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CreateNoteDialog(
-    component: Notes,
-    snackbarHostState: SnackbarHostState,
-    scope: CoroutineScope,
+	show: Boolean,
+	component: Notes,
+	snackbarHostState: SnackbarHostState,
+	scope: CoroutineScope,
 ) {
 	MpDialog(
-		visible = true,
+		visible = show,
 		title = "Create Note",
-		modifier = Modifier.padding(Ui.Padding.XL),
 		onCloseRequest = { component.dismissCreate() }
 	) {
 		var newNoteText by remember { mutableStateOf("") }
 		var newNoteError by remember { mutableStateOf(false) }
 
-		Box(modifier = Modifier.fillMaxWidth()) {
+		Box(modifier = Modifier.size(200.dp).padding(Ui.Padding.XL)) {
 			Column(
 				modifier = Modifier
 					.width(IntrinsicSize.Max)
@@ -36,6 +37,7 @@ internal fun CreateNoteDialog(
 			) {
 				Text(
 					"New Note:",
+					modifier = Modifier.wrapContentSize(),
 					style = MaterialTheme.typography.headlineLarge
 				)
 

@@ -20,7 +20,6 @@ internal fun GroupDeleteNotAllowedDialog(scene: SceneItem, dismissDialog: (Boole
 	MpDialog(
 		onCloseRequest = {},
 		visible = true,
-		modifier = Modifier.padding(Ui.Padding.XL),
 		title = "Cannot Delete Group"
 	) {
 		Box(modifier = Modifier.fillMaxWidth()) {

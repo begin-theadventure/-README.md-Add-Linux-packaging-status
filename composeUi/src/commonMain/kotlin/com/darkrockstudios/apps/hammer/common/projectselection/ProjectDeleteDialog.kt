@@ -23,13 +23,11 @@ internal fun ProjectDeleteDialog(projectDef: ProjectDef, dismissDialog: (Boolean
 	MpDialog(
 		onCloseRequest = {},
 		visible = true,
-		modifier = Modifier.padding(Ui.Padding.XL),
 		title = MR.strings.delete_project_title.get()
 	) {
-		Box(modifier = Modifier.fillMaxWidth()) {
+		Box(modifier = Modifier.width(IntrinsicSize.Min).padding(Ui.Padding.XL)) {
 			Column(
 				modifier = Modifier
-					.width(IntrinsicSize.Max)
 					.align(Alignment.Center)
 					.padding(Ui.Padding.XL)
 			) {
@@ -42,12 +40,13 @@ internal fun ProjectDeleteDialog(projectDef: ProjectDef, dismissDialog: (Boolean
 				Spacer(modifier = Modifier.size(Ui.Padding.XL))
 
 				Row(
-					modifier = Modifier.fillMaxWidth().padding(top = Ui.Padding.L),
+					modifier = Modifier.width(IntrinsicSize.Max).padding(top = Ui.Padding.L),
 					horizontalArrangement = Arrangement.SpaceBetween
 				) {
 					Button(onClick = { dismissDialog(true) }) {
 						Text(MR.strings.delete_project_confirm.get())
 					}
+					Spacer(modifier = Modifier.size(Ui.Padding.XL))
 					Button(onClick = { dismissDialog(false) }) {
 						Text(MR.strings.delete_project_cancel.get())
 					}

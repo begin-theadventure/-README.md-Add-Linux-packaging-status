@@ -79,9 +79,7 @@ fun NotesUi(
 		SnackbarHost(snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter))
 	}
 
-	if (state.showCreate) {
-		CreateNoteDialog(component, snackbarHostState, scope)
-	}
+	CreateNoteDialog(state.showCreate, component, snackbarHostState, scope)
 
 	state.confirmDelete?.let { note ->
 		ConfirmDeleteDialog(note, component, snackbarHostState, scope)
